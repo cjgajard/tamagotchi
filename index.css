@@ -1,0 +1,135 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.egg {
+  background-color: #833996;
+  padding-top: 80px;
+  padding-right: 60px;
+  padding-bottom: 30px;
+  padding-left: 60px;
+  display:  inline-block;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  border-top-left-radius: 60%;
+  border-top-right-radius: 60%;
+  position: relative;
+  visibility: hidden;
+}
+.hole > .crack {
+  background-color: #f4629d;
+  border-radius: 4px;
+  position: absolute;
+}
+.hole.revert {
+  transform: rotate(180deg);
+  position: absolute;
+  bottom: -8px;
+  right: 0;
+}
+.crack.p0 {
+  left: 62px;
+  top: 95px;
+  width: 191px;
+  height: 179px;
+}
+.crack.p1 {
+  left: 47px;
+  top: 130px;
+  transform: rotate(25deg);
+  width: 96px;
+  height: 112px;
+}
+.crack.p2 {
+  left: 59px;
+  top: 90px;
+  transform: rotate(4deg);
+  width: 114px;
+  height: 73px;
+}
+.crack.p3 {
+  left: 133px;
+  top: 78px;
+  transform: rotate(-13.3deg) skewX(60deg);
+  width: 60px;
+  height: 30px;
+}
+.crack.p4 {
+  left: 204px;
+  top: 78px;
+  transform: perspective(5px) rotateX(7deg) rotateZ(45deg);
+  width: 51px;
+  height: 37px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.emulator {
+  background-image: url('./vendor/bg.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  border: 1px solid transparent;
+}
+.emu-img {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  visibility: hidden;
+}
+.emu-img.sel {
+  visibility: visible;
+}
+.emu-img.p0,
+.emu-img.p1,
+.emu-img.p2,
+.emu-img.p3 {
+  top: 21px;
+}
+.emu-img.p4,
+.emu-img.p5,
+.emu-img.p6,
+.emu-img.p7 {
+  bottom: 32px;
+}
+.emu-img.p0,
+.emu-img.p4 {
+  left: 18px;
+}
+.emu-img.p1,
+.emu-img.p5 {
+  left: 62px;
+}
+.emu-img.p6,
+.emu-img.p2 {
+  left: 104px;
+}
+.emu-img.p7,
+.emu-img.p3 {
+  left: 146px;
+}
+.pixel-table {
+  margin-top: 48px;
+  margin-bottom: 64px;
+}
+.pixel {
+  width: 4px;
+  height: 4px;
+  background-color: #80808020;
+  border: none;
+}
+.pixel.on {
+  background-color: black;
+}
+.emu-btn {
+  border-radius: 50%;
+  padding: 12px;
+  background-color: #f4629d;
+  border-color: #e4528d;
+  outline: none;
+  margin: 6px;
+}
+.emu-btn {
+}

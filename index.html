@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+    <link rel="shortcut icon" href="./static/favicon.ico" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Tamagotchi</title>
+  </head>
+  <body>
+    <h1 hidden>Tamagotchi</h1>
+    <div class="container">
+      <div id="egg" class="egg">
+        <div class="hole">
+          <div class="crack p0"></div>
+        </div>
+        <div class="hole">
+          <div class="crack p1"></div>
+          <div class="crack p2"></div>
+          <div class="crack p3"></div>
+          <div class="crack p4"></div>
+        </div>
+        <div class="hole revert">
+          <div class="crack p1"></div>
+          <div class="crack p2"></div>
+          <div class="crack p3"></div>
+          <div class="crack p4"></div>
+        </div>
+        <div class="emulator">
+          <img class="emu-img p0" src="./vendor/food.webp" />
+          <img class="emu-img p1" src="./vendor/lights.webp" />
+          <img class="emu-img p2" src="./vendor/game.webp" />
+          <img class="emu-img p3" src="./vendor/medicine.webp" />
+          <img class="emu-img p4" src="./vendor/bathroom.webp" />
+          <img class="emu-img p5" src="./vendor/status.webp" />
+          <img class="emu-img p6" src="./vendor/training.webp" />
+          <img class="emu-img p7" src="./vendor/attention.webp" />
+          <table id="pixel-table" class="pixel-table"></table>
+        </div>
+        <div style="text-align:center">
+          <button class="emu-btn" id="button-A">
+          </button><button class="emu-btn" id="button-B">
+          </button><button class="emu-btn" id="button-C"></button>
+        </div>
+      </div>
+    </div>
+    <script src="./src/index.js"></script>
+  </body>
+</html>
