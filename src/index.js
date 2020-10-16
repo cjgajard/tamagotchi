@@ -1,82 +1,54 @@
-import Pixel from './pixel';
+import Button from './button';
 import Menu from './menu';
+import PixelTable from './pixel-table';
+import Tamagotchi from './tamagotchi';
+import emulatorBg from '../vendor/bg.webp';
 
-const IDLE_0 = `
-........
-........
-........
-..xxxx..
-.x....x.
-x.x..x.x
-x..xx..x
-.x....x.
-..xxxx..
-`;
+const menu = new Menu();
+const screen = new PixelTable();
+const tamagotchi = new Tamagotchi(screen);
+const buttonA = new Button('z');
+const buttonB = new Button('x');
+const buttonC = new Button('c');
 
-const IDLE_1 = `
-........
-..xxxx..
-.x....x.
-.xx..xx.
-.x.xx.x.
-.x....x.
-.x....x.
-.x....x.
-..xxxx..
-`;
+buttonA.onclick = function () {
+  menu.next();
+};
+buttonB.onclick = function () {
+  tamagotchi.jump();
+};
+buttonC.onclick = function () {
+  menu.deselect();
+};
 
-const IDLE_2 = `
-..xxxx..
-.x....x.
-x.x..x.x
-x..xx..x
-.x....x.
-..xxxx..
-........
-........
-........
-`;
+const emuBg = document.createElement('img');
+emuBg.onload = function () {
+  const emu = document.getElementById('emulator');
+  emu.style.setProperty('background-image', emulatorBg);
+  emu.style.removeProperty('visibility');
+};
 
-const IDLE_4 = `
-........
-..xxxx..
-.x....x.
-.x....x.
-.xx..xx.
-.x.xx.x.
-.x....x.
-.x....x.
-..xxxx..
-`;
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('egg-hole').style.removeProperty('visibility');
+  emuBg.src = emulatorBg;
 
-let animationFrame = 0;
+  document.addEventListener('keydown', ev => Button.onkeydown(ev));
+  document.addEventListener('keyup', ev => Button.onkeyup(ev));
+  screen.hydrate(document.getElementById('pixel-table'));
+  menu.hydrate(document.getElementsByClassName('emu-img'));
+  buttonA.hydrate(document.getElementById('button-A'));
+  buttonB.hydrate(document.getElementById('button-B'));
+  buttonC.hydrate(document.getElementById('button-C'));
 
-document.addEventListener('DOMContentLoaded', function () {
-  Pixel.onload(document.getElementById('pixel-table'));
-  Menu.onload(document.getElementsByClassName('emu-img'));
-
-  const buttonA = document.getElementById('button-A');
-  buttonA.addEventListener('click', () => Menu.next());
-  const buttonC = document.getElementById('button-C');
-  buttonC.addEventListener('click', () => Menu.deselect());
-
-  setInterval(function () {
-    switch (animationFrame++) {
-    case 0:
-      Pixel.drawString(IDLE_0, 8, 2);
-      break;
-    case 1:
-      Pixel.drawString(IDLE_1, 8, 2);
-      break;
-    case 2:
-      Pixel.drawString(IDLE_2, 8, 2);
-      break;
-    case 3:
-      Pixel.drawString(IDLE_4, 8, 2);
-      animationFrame = 0;
-      break;
+  let id = null;
+  id = setInterval(() => {
+    try {
+      tamagotchi.draw();
     }
-  }, 333);
-
-  document.getElementById('egg').style.visibility = 'visible';
+    catch {
+      if (id) {
+        clearInterval(id);
+      }
+    }
+  }, screen.refreshTime);
 });

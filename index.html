@@ -9,24 +9,22 @@
   </head>
   <body>
     <h1 hidden>Tamagotchi</h1>
-    <div class="container">
+    <div class="container text-center">
       <div id="egg" class="egg">
-        <div class="hole">
+        <div id="egg-hole" class="egg-hole" style="visibility:hidden">
+          <div class="crack p1"></div>
+          <div class="crack p2"></div>
+          <div class="crack p3"></div>
+          <div class="crack p4"></div>
+          <div class="revert">
+            <div class="crack p1"></div>
+            <div class="crack p2"></div>
+            <div class="crack p3"></div>
+            <div class="crack p4"></div>
+          </div>
           <div class="crack p0"></div>
         </div>
-        <div class="hole">
-          <div class="crack p1"></div>
-          <div class="crack p2"></div>
-          <div class="crack p3"></div>
-          <div class="crack p4"></div>
-        </div>
-        <div class="hole revert">
-          <div class="crack p1"></div>
-          <div class="crack p2"></div>
-          <div class="crack p3"></div>
-          <div class="crack p4"></div>
-        </div>
-        <div class="emulator">
+        <div id="emulator" class="emulator" style="visibility:hidden">
           <img class="emu-img p0" src="./vendor/food.webp" />
           <img class="emu-img p1" src="./vendor/lights.webp" />
           <img class="emu-img p2" src="./vendor/game.webp" />
@@ -37,7 +35,7 @@
           <img class="emu-img p7" src="./vendor/attention.webp" />
           <table id="pixel-table" class="pixel-table"></table>
         </div>
-        <div style="text-align:center">
+        <div class="text-center">
           <button class="emu-btn" id="button-A">
           </button><button class="emu-btn" id="button-B">
           </button><button class="emu-btn" id="button-C"></button>

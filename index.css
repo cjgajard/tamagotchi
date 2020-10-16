@@ -10,30 +10,30 @@
   padding-right: 60px;
   padding-bottom: 30px;
   padding-left: 60px;
-  display:  inline-block;
+  display: inline-block;
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
   border-top-left-radius: 60%;
   border-top-right-radius: 60%;
   position: relative;
-  visibility: hidden;
 }
-.hole > .crack {
+.egg-hole .crack {
   background-color: #f4629d;
   border-radius: 4px;
   position: absolute;
 }
-.hole.revert {
+.egg-hole > .revert {
   transform: rotate(180deg);
   position: absolute;
   bottom: -8px;
   right: 0;
 }
 .crack.p0 {
-  left: 62px;
+  left: 72px;
   top: 95px;
-  width: 191px;
+  width: 171px;
   height: 179px;
+  background-color: #833996;
 }
 .crack.p1 {
   left: 47px;
@@ -131,5 +131,9 @@
   outline: none;
   margin: 6px;
 }
-.emu-btn {
+.emu-btn.active {
+  border-style: inset;
+}
+.text-center {
+  text-align: center;
 }
