@@ -2,60 +2,45 @@ import Pixel, { OFF, ON } from './pixel';
 
 const defOx = 0;
 const defOy = 0;
-const defRefresh = 250;
+const defRefresh = 125;
 const defWidth = 24;
 const defHeight = 12;
 
 class PixelTable {
   constructor(time = defRefresh, height = defHeight, width = defWidth) {
-    this.drawn = {};
     this.height = height;
     this.refreshTime = time;
     this.repo = [];
+    this.drawn = [];
     this.width = width;
   }
 
-  assign(column, line, value) {
+  assign(column, line) {
     const row = this.repo[line];
-    if (typeof row === 'undefined') return;
+    if (typeof row === 'undefined')
+      return;
     const pixel = row[column];
-    pixel.change(value);
+    pixel.change(ON);
+    this.drawn.push(pixel);
   }
 
-  deleteString() {
-    const ox = this.drawn.column || defOx;
-    const oy = this.drawn.line || defOy;
-    const string = this.drawn.string || '';
+  clean() {
+    this.drawn.forEach(pixel => pixel.change(OFF));
+    this.drawn = [];
+  }
+
+  drawString(string, ox = defOx, oy = defOy) {
     string.trim().split('\n').forEach((linestr, line) => {
       linestr.split('').forEach((ch, column) => {
         switch (ch) {
         case 'x':
-          this.assign(column + ox, line + oy, OFF);
+          this.assign(column + ox, line + oy);
           break;
         default:
           break;
         }
       });
     });
-  }
-
-  drawString(string, ox = 0, oy = 0) {
-    string.trim().split('\n').forEach((linestr, line) => {
-      linestr.split('').forEach((ch, column) => {
-        switch (ch) {
-        case 'x':
-          this.assign(column + ox, line + oy, ON);
-          break;
-        case '.':
-        default:
-          this.assign(column + ox, line + oy, OFF);
-          break;
-        }
-      });
-    });
-    this.drawn.column = ox;
-    this.drawn.line = oy;
-    this.drawn.string = string;
   }
 
   hydrate(root) {
@@ -67,7 +52,7 @@ class PixelTable {
         const cell = document.createElement('td');
         cell.className = 'pixel';
         row.appendChild(cell);
-        this.repo[line].push(new Pixel(cell));
+        this.repo[line].push(new Pixel(cell, column, line));
       }
       tbody.appendChild(row);
     }

@@ -5,28 +5,25 @@ class Button {
 
   hydrate(root) {
     this.root = root;
-    this.root.addEventListener('click', event => this.onclick(event));
+    this.root.addEventListener('click', ev => this.onclick(ev));
     this.constructor.repo[this.key] = this;
   }
 
-  static onkeyup(event) {
-    const button = this.repo[event.key];
-    if (typeof button === 'undefined') {
+  static onkeyup(ev) {
+    const button = this.repo[ev.key];
+    if (typeof button === 'undefined')
       return;
-    }
     button.root.classList.remove('active');
   }
 
-  static onkeydown(event) {
-    if (event.repeat) {
+  static onkeydown(ev) {
+    if (ev.repeat)
       return;
-    }
-    const button = this.repo[event.key];
-    if (typeof button === 'undefined') {
+    const button = this.repo[ev.key];
+    if (typeof button === 'undefined')
       return;
-    }
     button.root.classList.add('active');
-    button.onclick(event);
+    button.onclick(ev);
   }
 }
 

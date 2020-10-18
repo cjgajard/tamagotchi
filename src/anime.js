@@ -3,7 +3,7 @@ export const JUMP = 'JUMP';
 
 const RESET = -1;
 
-class Animation {
+class Anime {
   constructor() {
     this.reset();
     this.state = IDLE;
@@ -15,8 +15,10 @@ class Animation {
   }
 
   jump() {
-    if (this.state === JUMP) return;
+    if (this.state === JUMP)
+      return;
     this.reset(JUMP);
   }
 }
-export default Animation;
+
+export default Anime;

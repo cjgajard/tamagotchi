@@ -3,7 +3,9 @@ export const TOGGLE = -1;
 export const ON = 1;
 
 class Pixel {
-  constructor(element) {
+  constructor(element, column, line) {
+    this.column = column;
+    this.line = line;
     this.$el = element;
   }
 

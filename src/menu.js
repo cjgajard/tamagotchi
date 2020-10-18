@@ -1,5 +1,4 @@
 export const EMPTY = -1;
-const NEXT = 1;
 
 class Menu {
   constructor() {
@@ -8,27 +7,24 @@ class Menu {
   }
 
   deselect() {
-    const el = this.options[this.selection];
-    if (typeof el !== 'undefined') {
-      el.classList.remove(this.constructor.selectLabel);
-    }
+    const op = this.options[this.selection];
+    if (typeof op === 'undefined')
+      return;
+    op.deselect();
     this.selection = EMPTY;
   }
 
+  draw() { // eslint-disable-line class-methods-use-this
+  }
+
   next() {
-    const index = (this.selection + NEXT) % this.options.length;
-    this.deselect();
-    this.options[index].classList.add(this.constructor.selectLabel);
+    const op = this.options[this.selection];
+    if (typeof op !== 'undefined')
+      op.deselect();
+    const index = (this.selection + 1) % this.options.length;
+    this.options[index].select();
     this.selection = index;
   }
-
-  hydrate(collection) {
-    Array.prototype.forEach.call(collection, (el) => {
-      this.options.push(el);
-    });
-  }
 }
-
-Menu.selectLabel = 'sel';
 
 export default Menu;

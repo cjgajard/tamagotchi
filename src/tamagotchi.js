@@ -1,4 +1,4 @@
-import Animation, { IDLE, JUMP } from './animation';
+import Anime, { IDLE, JUMP } from './anime';
 
 const Sprite = [
   `
@@ -37,24 +37,20 @@ x..xx..x
 ];
 
 class Tamagotchi {
-  constructor(screen) {
-    this.animation = new Animation();
-    this.screen = screen;
-  }
-
-  jump() {
-    this.animation.jump();
+  constructor(scr) {
+    this.animation = new Anime();
+    this.screen = scr;
   }
 
   drawIdle() {
     /* eslint-disable no-magic-numbers */
     switch (this.animation.frame) {
     case 0:
-      this.screen.deleteString();
+      this.screen.clean();
       this.screen.drawString(Sprite[0], 8, 6);
       break;
     case 2:
-      this.screen.deleteString();
+      this.screen.clean();
       this.screen.drawString(Sprite[2], 8, 5);
       break;
     case 3:
@@ -67,7 +63,7 @@ class Tamagotchi {
   }
 
   drawJump() {
-    this.screen.deleteString();
+    this.screen.clean();
     /* eslint-disable no-magic-numbers */
     switch (this.animation.frame) {
     case 0:
@@ -100,6 +96,10 @@ class Tamagotchi {
       this.drawIdle();
       break;
     }
+  }
+
+  jump() {
+    this.animation.jump();
   }
 }
 

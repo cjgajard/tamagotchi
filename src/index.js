@@ -1,24 +1,56 @@
+import FoodMenu, { MEAL, SNACK } from './food-menu';
+import Menu, { FOOD } from './main-menu';
 import Button from './button';
-import Menu from './menu';
+import { EMPTY } from './menu';
 import PixelTable from './pixel-table';
 import Tamagotchi from './tamagotchi';
 import emulatorBg from '../vendor/bg.webp';
 
-const menu = new Menu();
-const screen = new PixelTable();
-const tamagotchi = new Tamagotchi(screen);
+const pixelTable = new PixelTable();
+
+const mainMenu = new Menu();
+const foodMenu = new FoodMenu(pixelTable);
+const tamagotchi = new Tamagotchi(pixelTable);
+let activeMenu = mainMenu;
+
 const buttonA = new Button('z');
 const buttonB = new Button('x');
 const buttonC = new Button('c');
 
 buttonA.onclick = function () {
-  menu.next();
+  activeMenu.next();
+  activeMenu.draw();
 };
 buttonB.onclick = function () {
-  tamagotchi.jump();
+  switch (mainMenu.selection) {
+  case EMPTY:
+    tamagotchi.jump();
+    break;
+  case FOOD:
+    switch (foodMenu.selection) {
+    case EMPTY:
+      activeMenu = foodMenu;
+      foodMenu.next();
+      foodMenu.draw();
+      break;
+    case MEAL:
+      console.warn('meal');
+      break;
+    case SNACK:
+      console.warn('snack');
+      break;
+    default:
+      break;
+    }
+    break;
+  default:
+    break;
+  }
 };
 buttonC.onclick = function () {
-  menu.deselect();
+  activeMenu.deselect();
+  mainMenu.deselect();
+  activeMenu = mainMenu;
 };
 
 const emuBg = document.createElement('img');
@@ -34,8 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.addEventListener('keydown', ev => Button.onkeydown(ev));
   document.addEventListener('keyup', ev => Button.onkeyup(ev));
-  screen.hydrate(document.getElementById('pixel-table'));
-  menu.hydrate(document.getElementsByClassName('emu-img'));
+  pixelTable.hydrate(document.getElementById('pixel-table'));
+  mainMenu.hydrate(document.getElementsByClassName('emu-img'));
   buttonA.hydrate(document.getElementById('button-A'));
   buttonB.hydrate(document.getElementById('button-B'));
   buttonC.hydrate(document.getElementById('button-C'));
@@ -43,12 +75,19 @@ document.addEventListener('DOMContentLoaded', () => {
   let id = null;
   id = setInterval(() => {
     try {
-      tamagotchi.draw();
-    }
-    catch {
-      if (id) {
-        clearInterval(id);
+      switch (mainMenu.selection) {
+      case FOOD:
+        if (foodMenu.selection === EMPTY)
+          tamagotchi.draw();
+        break;
+      default:
+        tamagotchi.draw();
       }
     }
-  }, screen.refreshTime);
+    catch (err) {
+      console.error(err);
+      if (id)
+        clearInterval(id);
+    }
+  }, pixelTable.refreshTime);
 });
