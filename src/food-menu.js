@@ -14,7 +14,7 @@ const mealSprite = `
 x...x..xx..x..x..
 xx.xx.x.x.x.x.x..
 x.x.x.xx..xxx.x..
-x...x.xxx.x.x.xxx
+x...x..xx.x.x.xxx
 `;
 
 const snackSprite = `

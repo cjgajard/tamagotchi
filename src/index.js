@@ -4,6 +4,7 @@ import Button from './button';
 import { EMPTY } from './menu';
 import PixelTable from './pixel-table';
 import Tamagotchi from './tamagotchi';
+import auclInterval from './autoclear-interval';
 import emulatorBg from '../vendor/bg.webp';
 
 const pixelTable = new PixelTable();
@@ -18,10 +19,14 @@ const buttonB = new Button('x');
 const buttonC = new Button('c');
 
 buttonA.onclick = function () {
+  if (tamagotchi.blocking)
+    return;
   activeMenu.next();
   activeMenu.draw();
 };
 buttonB.onclick = function () {
+  if (tamagotchi.blocking)
+    return;
   switch (mainMenu.selection) {
   case EMPTY:
     tamagotchi.jump();
@@ -34,10 +39,14 @@ buttonB.onclick = function () {
       foodMenu.draw();
       break;
     case MEAL:
-      console.warn('meal');
+      activeMenu.deselect();
+      activeMenu = mainMenu;
+      tamagotchi.eat();
       break;
     case SNACK:
-      console.warn('snack');
+      activeMenu.deselect();
+      activeMenu = mainMenu;
+      tamagotchi.eat();
       break;
     default:
       break;
@@ -48,8 +57,9 @@ buttonB.onclick = function () {
   }
 };
 buttonC.onclick = function () {
+  if (tamagotchi.blocking)
+    return;
   activeMenu.deselect();
-  mainMenu.deselect();
   activeMenu = mainMenu;
 };
 
@@ -72,22 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
   buttonB.hydrate(document.getElementById('button-B'));
   buttonC.hydrate(document.getElementById('button-C'));
 
-  let id = null;
-  id = setInterval(() => {
-    try {
-      switch (mainMenu.selection) {
-      case FOOD:
-        if (foodMenu.selection === EMPTY)
-          tamagotchi.draw();
-        break;
-      default:
+  auclInterval(() => {
+    switch (mainMenu.selection) {
+    case FOOD:
+      if (foodMenu.selection === EMPTY)
         tamagotchi.draw();
-      }
+      break;
+    default:
+      tamagotchi.draw();
     }
-    catch (err) {
-      console.error(err);
-      if (id)
-        clearInterval(id);
-    }
-  }, pixelTable.refreshTime);
+  }, pixelTable.refreshTime, true);
 });

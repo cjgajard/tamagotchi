@@ -18,7 +18,7 @@ xxx....x
 .x....x.
 ..xxxx..
   `,
-]
+];
 
 export const idleSprite = [
   `
