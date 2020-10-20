@@ -4,6 +4,7 @@ import Button from './button';
 import { EMPTY } from './menu';
 import PixelTable from './pixel-table';
 import Tamagotchi from './tamagotchi';
+import Cloud from './cloud';
 import auclInterval from './autoclear-interval';
 import emulatorBg from '../vendor/bg.webp';
 
@@ -13,6 +14,8 @@ const mainMenu = new Menu();
 const foodMenu = new FoodMenu(pixelTable);
 const tamagotchi = new Tamagotchi(pixelTable);
 let activeMenu = mainMenu;
+
+Cloud.populate();
 
 const buttonA = new Button('z');
 const buttonB = new Button('x');
@@ -92,4 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tamagotchi.draw();
     }
   }, pixelTable.refreshTime, true);
+
+  Cloud.hydrate();
+  Cloud.loop();
 });
