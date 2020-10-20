@@ -1,5 +1,5 @@
-import Anime from './anime';
-import { idleSprite } from './sprites';
+import Anime from './.';
+import { idleSprite } from '../sprites';
 
 export default class IdleAnime extends Anime {
   draw() {

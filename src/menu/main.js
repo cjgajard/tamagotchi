@@ -1,5 +1,5 @@
-import Menu, { EMPTY } from './menu';
-import { MainMenuOpt as Opt } from './opt';
+import Menu, { EMPTY } from './.';
+import { MainMenuOpt as Opt } from '../opt';
 
 export { EMPTY };
 export const FOOD = 0;

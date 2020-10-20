@@ -1,6 +1,9 @@
-import EatAnime from './eat-anime';
-import IdleAnime from './idle-anime';
-import JumpAnime from './jump-anime';
+import { MEAL, SNACK } from './menu/food';
+import EatAnime from './anime/eat';
+import IdleAnime from './anime/idle';
+import JumpAnime from './anime/jump';
+import MealAnime from './anime/meal';
+import SnackAnime from './anime/snack';
 
 export const IDLE = 'IDLE';
 export const JUMP = 'JUMP';
@@ -8,6 +11,7 @@ export const EAT = 'EAT';
 
 class Tamagotchi {
   constructor(scr) {
+    this.screen = scr;
     this.animations = {
       [EAT]: new EatAnime(scr),
       [IDLE]: new IdleAnime(scr),
@@ -25,8 +29,19 @@ class Tamagotchi {
     this.next();
   }
 
-  eat() {
+  eat(food) {
     this.state = EAT;
+    const anime = this.animations[EAT];
+    switch (food) {
+    case MEAL:
+      anime.food = new MealAnime(this.screen);
+      break;
+    case SNACK:
+      anime.food = new SnackAnime(this.screen);
+      break;
+    default:
+      break;
+    }
     this.blocking = true;
   }
 

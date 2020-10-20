@@ -1,5 +1,5 @@
-import Menu from './menu';
-import Opt from './opt';
+import Menu from './.';
+import Opt from '../opt';
 
 export const MEAL = 0;
 export const SNACK = 1;
@@ -23,7 +23,6 @@ xx..xxx..xx..xx.x.x
 ..x.x.x.x.x.x...xx.
 xx..x.x..xx..xx.x.x
 `;
-
 
 class FoodMenu extends Menu {
   constructor(scr) {

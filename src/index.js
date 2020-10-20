@@ -1,5 +1,5 @@
-import FoodMenu, { MEAL, SNACK } from './food-menu';
-import Menu, { FOOD } from './main-menu';
+import FoodMenu, { MEAL, SNACK } from './menu/food';
+import Menu, { FOOD } from './menu/main';
 import Button from './button';
 import { EMPTY } from './menu';
 import PixelTable from './pixel-table';
@@ -41,12 +41,12 @@ buttonB.onclick = function () {
     case MEAL:
       activeMenu.deselect();
       activeMenu = mainMenu;
-      tamagotchi.eat();
+      tamagotchi.eat(MEAL);
       break;
     case SNACK:
       activeMenu.deselect();
       activeMenu = mainMenu;
-      tamagotchi.eat();
+      tamagotchi.eat(SNACK);
       break;
     default:
       break;

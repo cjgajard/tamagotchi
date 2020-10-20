@@ -4,7 +4,6 @@ export const eatSprite = [
 x....x.
 .x..x.x
 ..x...x
-..x...x
 xxx...x
 x....x.
 .xxxx..
@@ -13,7 +12,6 @@ x....x.
 ..xxxx..
 .x....x.
 x..x...x
-x......x
 xxx....x
 .x....x.
 ..xxxx..

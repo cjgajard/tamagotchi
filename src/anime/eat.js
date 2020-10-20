@@ -1,5 +1,5 @@
-import Anime from './anime';
-import { eatSprite } from './sprites';
+import Anime from './.';
+import { eatSprite } from '../sprites';
 
 export default class EatAnime extends Anime {
   draw() {
@@ -9,15 +9,23 @@ export default class EatAnime extends Anime {
     case 4:
     case 8:
       this.screen.clean();
-      this.screen.drawString(eatSprite[0], 8, 4);
+      if (this.food)
+        this.food.draw();
+      this.screen.drawString(eatSprite[0], 9, 5);
       break;
     case 2:
     case 6:
     case 10:
       this.screen.clean();
-      this.screen.drawString(eatSprite[1], 8, 4);
+      if (this.food) {
+        this.food.frame++;
+        this.food.draw();
+      }
+      this.screen.drawString(eatSprite[1], 9, 5);
       break;
     case 11:
+      if (this.food)
+        this.food.frame = 0;
       this.reset();
       return true;
     default:

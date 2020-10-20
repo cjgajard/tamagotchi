@@ -1,13 +1,11 @@
-const RESET = -1;
-
-class Anime {
+export default class Anime {
   constructor(scr) {
     this.screen = scr;
     this.reset();
   }
 
   reset() {
-    this.frame = RESET;
+    this.frame = this.constructor.reset;
   }
 
   draw() { // eslint-disable-line class-methods-use-this
@@ -15,4 +13,5 @@ class Anime {
   }
 }
 
-export default Anime;
+const RESET = -1;
+Anime.reset = RESET;
