@@ -6,10 +6,10 @@ I do not own the assets in the `vendor/` folder.
 
 ## Building
 
-`
+```
 npm install
 npn run build
-`
+```
 This will bundle everything into the `dist/` folder.
 
 ## TODO
