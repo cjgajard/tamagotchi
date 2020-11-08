@@ -33,6 +33,7 @@ body {
   height: 132px;
   position: absolute;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 .container {
   margin-left: auto;

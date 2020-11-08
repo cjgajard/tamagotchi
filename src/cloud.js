@@ -48,13 +48,13 @@ export default class Cloud {
   static populate() {
     let cloud = null;
     /* eslint-disable no-magic-numbers */
-    cloud = new Cloud(50, 1);
-    cloud.position = 20;
-    this.repo.push(cloud); // eslint-disable-line no-magic-numbers
-    cloud = new Cloud(20, 1);
+    cloud = new Cloud(20, 1.0);
     cloud.position = 60;
     this.repo.push(cloud);
-    cloud = new Cloud(80, 1.2);
+    cloud = new Cloud(50, 1.2);
+    cloud.position = 20;
+    this.repo.push(cloud);
+    cloud = new Cloud(80, 1.4);
     cloud.position = 80;
     this.repo.push(cloud);
     /* eslint-enable no-magic-numbers */
